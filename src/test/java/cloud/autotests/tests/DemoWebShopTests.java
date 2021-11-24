@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class DemoWebShopTests extends TestBase{
 
-    String authCookie;
+    String authCookie = "";
     @BeforeEach
     public void getAndSetCookie() {
         step("Get cookie by api and set it to browser", () -> {
@@ -47,7 +47,7 @@ public class DemoWebShopTests extends TestBase{
             given()
                     .filter(customLogFilter().withCustomTemplates())
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-                    .cookie("NOPCOMMERCE.AUTH", authCookie)
+                    .cookie("NOPCOMMERCE.AUTH")
                     .when()
                     .post("/addproducttocart/catalog/45/1/1")
                     .then()

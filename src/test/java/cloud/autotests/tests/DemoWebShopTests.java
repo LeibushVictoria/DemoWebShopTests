@@ -30,7 +30,7 @@ public class DemoWebShopTests {
     String authCookie;
     @BeforeEach
     public void getAndSetCookie() {
-        step("Get cookie by api and set it to browser", () -> {
+        step("Get cookie by api", () -> {
             authCookie = given()
                     .filter(customLogFilter().withCustomTemplates())
                     .contentType("application/x-www-form-urlencoded; charset=UTF-8")
@@ -42,12 +42,14 @@ public class DemoWebShopTests {
                     .statusCode(302)
                     .extract()
                     .cookie("NOPCOMMERCE.AUTH");
+        });
 
+        step("Set cookie to browser", () -> {
             open("/Themes/DefaultClean/Content/images/logo.png");
-
             getWebDriver().manage().addCookie(
                     new Cookie("NOPCOMMERCE.AUTH", authCookie));
         });
+
     }
 
     @Test

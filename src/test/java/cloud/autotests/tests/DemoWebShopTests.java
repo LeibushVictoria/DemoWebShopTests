@@ -67,6 +67,9 @@ public class DemoWebShopTests {
                     .body("message", is("The product has been added to your <a href=\"/cart\">shopping cart</a>"));
         });
 
+        getWebDriver().manage().addCookie(
+                new Cookie("NOPCOMMERCE.AUTH", authCookie));
+
         step("Check cart page", () -> {
             open("/cart");
             $(".page-body").shouldHave(text("Fiction"));
@@ -89,6 +92,9 @@ public class DemoWebShopTests {
                     .statusCode(200)
                     .body(matchesJsonSchemaInClasspath("shemas/AddToWishlistSheme.json"));
         });
+
+        getWebDriver().manage().addCookie(
+                new Cookie("NOPCOMMERCE.AUTH", authCookie));
 
         step("Check wishlist page", () -> {
             open("/wishlist");
